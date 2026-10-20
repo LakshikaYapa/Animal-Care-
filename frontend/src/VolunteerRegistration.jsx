@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 export default function VolunteerRegistration() {
   const [volunteer, setVolunteer] = useState({ fullName: '', address: '', email: '' })
+  const [photoUnavailable, setPhotoUnavailable] = useState(false)
 
   function updateVolunteer(event) {
     const { name, value } = event.target
@@ -14,7 +15,18 @@ export default function VolunteerRegistration() {
         <a className="text-xl font-bold tracking-[-1px] focus-visible:outline-[#386844] min-[601px]:text-2xl" href="#">Animal Care <span className="ml-2" aria-hidden="true">??</span></a>
         <a className="text-sm underline-offset-4 focus-visible:outline-[#386844]" href="#register">Back to roles</a>
       </header>
-      <section className="mx-auto mt-10 max-w-[720px] rounded-3xl border border-[#dce4d8] bg-white p-[clamp(24px,5vw,48px)] min-[601px]:mt-16" aria-labelledby="volunteer-title">
+      <section className="mx-auto mt-10 grid max-w-[1120px] overflow-hidden rounded-3xl border border-[#dce4d8] bg-white min-[601px]:mt-16 lg:grid-cols-[380px_minmax(0,1fr)]" aria-labelledby="volunteer-title">
+        <aside className="relative isolate min-h-[320px] overflow-hidden bg-[#34503c] lg:min-h-[700px]" aria-label="Volunteering with animals">
+          {!photoUnavailable && (
+            <img className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_60%]" src="/media/volunteer-care.jpg" alt="A volunteer caring for dogs at an animal shelter" width={1080} height={1920} onError={() => setPhotoUnavailable(true)} />
+          )}
+          <div className="absolute inset-0 -z-10 bg-linear-to-t from-[#10291bf2] via-transparent to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 px-8 pb-10 text-white">
+            <p className="text-[11px] font-bold tracking-[2.5px] text-[#d7edaa]">YOUR TIME. THEIR HAPPINESS.</p>
+            <p className="mt-4 text-[36px] leading-[1.15] font-medium tracking-[-1px]">A little kindness.<br />A lasting difference.</p>
+          </div>
+        </aside>
+        <div className="min-w-0 p-[clamp(24px,4vw,48px)]">
         <p className="text-[11px] font-bold tracking-[2.5px]">JOIN AS A VOLUNTEER</p>
         <h1 className="my-5 text-[clamp(30px,4vw,44px)] leading-[1.15] font-medium tracking-[-1px]" id="volunteer-title">Volunteer registration</h1>
         <p className="leading-[1.7] text-[#52655c]">Tell us about yourself and help us care for animals together.</p>
@@ -34,6 +46,7 @@ export default function VolunteerRegistration() {
               <input className="w-full rounded-xl border border-[#b7c5b4] bg-white px-4 py-3 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="volunteer-email" name="email" type="email" autoComplete="email" maxLength={254} required value={volunteer.email} onChange={updateVolunteer} />
             </label>
           </fieldset>
+        </div>
       </section>
     </main>
   )
