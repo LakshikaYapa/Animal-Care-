@@ -1,6 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function FunderRegistration() {
+  const videoRef = useRef(null)
+  const [playing, setPlaying] = useState(false)
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const sync = () => {
+      if (preference.matches) videoRef.current?.pause()
+      else videoRef.current?.play().catch(() => {})
+    }
+    sync()
+    preference.addEventListener('change', sync)
+    return () => preference.removeEventListener('change', sync)
+  }, [])
+
+  function togglePlayback() {
+    if (videoRef.current.paused) videoRef.current.play().catch(() => {})
+    else videoRef.current.pause()
+  }
+
   const [funder, setFunder] = useState({ fullName: '', email: '', password: '', confirmPassword: '', funderType: '', organizationName: '', phone: '' })
 
   const [confirmationTouched, setConfirmationTouched] = useState(false)
@@ -20,6 +39,10 @@ export default function FunderRegistration() {
       <section className="mx-auto mt-10 grid max-w-[1120px] overflow-hidden rounded-3xl border border-[#dce4d8] bg-white min-[601px]:mt-16 lg:grid-cols-[380px_minmax(0,1fr)]" aria-labelledby="funder-title">
         <aside className="relative isolate min-h-[320px] overflow-hidden bg-[#34503c] lg:min-h-[700px]" aria-label="Supporting a kinder future">
           <img className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_35%]" src="/media/funder-care.jpg" alt="A glass savings jar with coins against a pink background" width={1080} height={1920} />
+          <video ref={videoRef} className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_35%]" muted loop playsInline preload="metadata" poster="/media/funder-care.jpg" aria-hidden="true" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
+            <source src="/media/funder-care.mp4" type="video/mp4" />
+          </video>
+          <button className="absolute top-5 right-5 cursor-pointer rounded-full border border-white/50 bg-black/40 px-4 py-2 text-xs text-white" type="button" onClick={togglePlayback} aria-label={playing ? 'Pause funder background video' : 'Play funder background video'}>{playing ? 'Pause video' : 'Play video'}</button>
           <div className="absolute inset-0 -z-10 bg-linear-to-t from-[#10291bf2] via-transparent to-transparent" />
           <div className="absolute inset-x-0 bottom-0 px-8 pb-10 text-white">
             <p className="text-[11px] font-bold tracking-[2.5px] text-[#d7edaa]">YOUR SUPPORT. THEIR FUTURE.</p>
