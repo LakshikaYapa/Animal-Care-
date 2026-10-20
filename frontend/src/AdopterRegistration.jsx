@@ -49,7 +49,7 @@ export default function AdopterRegistration() {
               { name: 'password', label: 'Password' },
               { name: 'confirmPassword', label: 'Confirm password' },
             ].map((field) => (
-              <label className="grid content-start gap-1 text-sm font-medium" htmlFor={`adopter-${field.name}`} key={field.name}>
+              <label className={`grid content-start gap-1 text-sm font-medium ${field.name === 'password' ? 'sm:col-start-1' : ''}`} htmlFor={`adopter-${field.name}`} key={field.name}>
                 {field.label}
                 <input className="w-full rounded-xl border border-[#b7c5b4] bg-white px-3 py-2 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844] aria-invalid:border-red-600" id={`adopter-${field.name}`} name={field.name} type="password" autoComplete="new-password" required value={adopter[field.name]} onChange={updateAdopter} onBlur={field.name === 'confirmPassword' ? () => setConfirmationTouched(true) : undefined} aria-invalid={field.name === 'confirmPassword' && passwordsMismatch ? true : undefined} aria-describedby={field.name === 'confirmPassword' && passwordsMismatch ? 'adopter-password-error' : undefined} />
               </label>

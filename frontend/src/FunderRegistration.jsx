@@ -62,7 +62,7 @@ export default function FunderRegistration() {
               { name: 'password', label: 'Password', type: 'password', autoComplete: 'new-password' },
               { name: 'confirmPassword', label: 'Confirm password', type: 'password', autoComplete: 'new-password' },
             ].map((field) => (
-              <label className="grid content-start gap-1 text-sm font-medium" htmlFor={`funder-${field.name}`} key={field.name}>
+              <label className={`grid content-start gap-1 text-sm font-medium ${field.name === 'password' ? 'sm:col-start-1' : ''}`} htmlFor={`funder-${field.name}`} key={field.name}>
                 {field.label}
                 <input className="w-full rounded-xl border border-[#b7c5b4] bg-white px-3 py-2 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844] aria-invalid:border-red-600" id={`funder-${field.name}`} name={field.name} type={field.type} autoComplete={field.autoComplete} maxLength={field.maxLength} required value={funder[field.name]} onChange={updateFunder} onBlur={field.name === 'confirmPassword' ? () => setConfirmationTouched(true) : undefined} aria-invalid={field.name === 'confirmPassword' && passwordsMismatch ? true : undefined} aria-describedby={field.name === 'confirmPassword' && passwordsMismatch ? 'funder-password-error' : undefined} />
               </label>
