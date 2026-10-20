@@ -1,7 +1,23 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import Registration from './Registration.jsx'
 
 function App() {
+  const [page, setPage] = useState(window.location.hash)
+
+  useEffect(() => {
+    const onNavigate = () => {
+      setPage(window.location.hash)
+      window.scrollTo(0, 0)
+    }
+    window.addEventListener('hashchange', onNavigate)
+    return () => window.removeEventListener('hashchange', onNavigate)
+  }, [])
+
+  return page === '#register' ? <Registration /> : <Home />
+}
+
+function Home() {
   const videoRef = useRef(null)
   const [playing, setPlaying] = useState(false)
 
@@ -36,7 +52,7 @@ function App() {
           <p className="eyebrow">LOVE. CARE. TOGETHER.</p>
           <h1 id="hero-title">Every animal<br />deserves a little love.</h1>
           <p className="hero-description">Caring for animals, together. Help us make their world a happier, kinder place.</p>
-          <a className="hero-cta" href="#get-started">Get Started <span aria-hidden="true">↗</span></a>
+          <a className="hero-cta" href="#register">Get Started <span aria-hidden="true">↗</span></a>
         </div>
         <div className="hero-footer">
           <a className="discover" href="#get-started">Discover how you can help ↓</a>
