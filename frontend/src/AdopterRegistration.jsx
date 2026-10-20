@@ -14,7 +14,7 @@ export default function AdopterRegistration() {
         <a className="text-xl font-bold tracking-[-1px] focus-visible:outline-[#386844] min-[601px]:text-2xl" href="#">Animal Care <span className="ml-2" aria-hidden="true">{String.fromCodePoint(0x1F43E)}</span></a>
         <a className="text-sm underline-offset-4 focus-visible:outline-[#386844]" href="#register">Back to roles</a>
       </header>
-      <section className="mx-auto mt-10 max-w-[720px] rounded-3xl border border-[#dce4d8] bg-white p-[clamp(24px,5vw,48px)] min-[601px]:mt-16" aria-labelledby="adopter-title">
+      <section className="mx-auto mt-10 max-w-180 rounded-3xl border border-[#dce4d8] bg-white p-[clamp(24px,5vw,48px)] min-[601px]:mt-16" aria-labelledby="adopter-title">
         <p className="text-[11px] font-bold tracking-[2.5px]">JOIN AS AN ADOPTER</p>
         <h1 className="my-5 text-[clamp(30px,4vw,44px)] leading-[1.15] font-medium tracking-[-1px]" id="adopter-title">Adopter registration</h1>
         <p className="leading-[1.7] text-[#52655c]">Tell us about yourself and take the first step toward giving an animal a loving home.</p>
