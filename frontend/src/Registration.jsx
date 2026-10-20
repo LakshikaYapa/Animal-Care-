@@ -52,6 +52,12 @@ export default function Registration() {
         {role === 'adopter' && (
           <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/adopter">Continue as Adopter &rarr;</a>
         )}
+        {role === 'staff' && (
+          <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/staff">Continue as Staff Member &rarr;</a>
+        )}
+        {role === 'funder' && (
+          <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/funder">Continue as Funder &rarr;</a>
+        )}
         </div>
       </section>
     </main>

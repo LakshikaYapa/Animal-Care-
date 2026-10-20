@@ -2,6 +2,8 @@
 import Registration from './Registration.jsx'
 import VolunteerRegistration from './VolunteerRegistration.jsx'
 import AdopterRegistration from './AdopterRegistration.jsx'
+import StaffRegistration from './StaffRegistration.jsx'
+import FunderRegistration from './FunderRegistration.jsx'
 
 function App() {
   const [page, setPage] = useState(window.location.hash)
@@ -17,6 +19,8 @@ function App() {
 
   if (page === '#register/volunteer') return <VolunteerRegistration />
   if (page === '#register/adopter') return <AdopterRegistration />
+  if (page === '#register/staff') return <StaffRegistration />
+  if (page === '#register/funder') return <FunderRegistration />
   return page === '#register' ? <Registration /> : <Home />
 }
 
