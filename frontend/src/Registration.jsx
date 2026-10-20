@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 const roles = [
   { value: 'volunteer', label: 'Volunteer', description: 'Give your time and skills to help animals.' },
   { value: 'adopter', label: 'Adopter', description: 'Give an animal a loving place to call home.' },
@@ -8,10 +6,6 @@ const roles = [
 ]
 
 export default function Registration() {
-  const [role, setRole] = useState('')
-  const selectedRole = roles.find((option) => option.value === role)
-
-
   return (
     <main className="min-h-svh px-[6%] pt-8 pb-16">
       <header className="flex items-center justify-between gap-6">
@@ -36,28 +30,17 @@ export default function Registration() {
         <p className="text-[11px] font-bold tracking-[2.5px]">JOIN OUR COMMUNITY</p>
         <h1 className="my-5 text-[clamp(30px,4vw,44px)] leading-[1.15] font-medium tracking-[-1px]" id="registration-title">How would you like to help?</h1>
         <p className="leading-[1.7] text-[#52655c]">Start by choosing your role. Your registration questions will be tailored to the way you want to help.</p>
-        <fieldset className="mt-7 grid grid-cols-1 gap-3.5 border-0 p-0 min-[601px]:grid-cols-2">
-          <legend className="mb-4 font-bold">Choose your role</legend>
-          {roles.map((option) => (
-            <label className={`flex cursor-pointer items-start gap-3 rounded-[14px] border-2 p-5 focus-within:outline-2 focus-within:outline-offset-[3px] focus-within:outline-[#386844] ${role === option.value ? 'border-[#386844] bg-[#f0f7e8]' : 'border-[#e0e6dc] hover:border-[#90ad7b]'}`} key={option.value}>
-              <input className="mt-[3px] shrink-0 accent-[#386844]" type="radio" name="role" value={option.value} checked={role === option.value} onChange={(event) => setRole(event.target.value)} />
-              <span><strong>{option.label}</strong><span className="mt-2 block text-sm leading-[1.6] text-[#52655c]">{option.description}</span></span>
-            </label>
-          ))}
-        </fieldset>
-        <p className="mt-6 text-sm text-[#386844]" role="status">{selectedRole ? `Selected role: ${selectedRole.label}` : 'Choose one role to get started.'}</p>
-        {role === 'volunteer' && (
-          <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/volunteer">Continue as Volunteer ?</a>
-        )}
-        {role === 'adopter' && (
-          <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/adopter">Continue as Adopter &rarr;</a>
-        )}
-        {role === 'staff' && (
-          <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/staff">Continue as Staff Member &rarr;</a>
-        )}
-        {role === 'funder' && (
-          <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/funder">Continue as Funder &rarr;</a>
-        )}
+        <nav className="mt-7" aria-label="Choose your registration role">
+          <h2 className="mb-4 font-bold">Choose your role</h2>
+          <div className="grid grid-cols-1 gap-3.5 min-[601px]:grid-cols-2">
+            {roles.map((option) => (
+              <a className="flex items-start gap-3 rounded-[14px] border-2 border-[#e0e6dc] p-5 no-underline hover:border-[#90ad7b] hover:bg-[#f0f7e8] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#386844]" href={`#register/${option.value}`} key={option.value}>
+                <span className="min-w-0 flex-1"><strong>{option.label}</strong><span className="mt-2 block text-sm leading-[1.6] text-[#52655c]">{option.description}</span></span>
+                <span className="text-[#386844]" aria-hidden="true">&rarr;</span>
+              </a>
+            ))}
+          </div>
+        </nav>
         </div>
       </section>
     </main>
