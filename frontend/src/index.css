@@ -1,1 +1,16 @@
 @import "tailwindcss" source(".");
+
+@layer base {
+  html {
+    @apply scroll-smooth motion-reduce:scroll-auto;
+  }
+
+  body {
+    @apply m-0 bg-[#f7f7ef] font-[Arial,sans-serif] text-[#18372e];
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-3 outline-offset-[5px] outline-[#d7edaa];
+  }
+}
