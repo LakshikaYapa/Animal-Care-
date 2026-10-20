@@ -1,21 +1,52 @@
+﻿import { useEffect, useRef, useState } from 'react'
+import './App.css'
+
 function App() {
+  const videoRef = useRef(null)
+  const [playing, setPlaying] = useState(false)
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const sync = () => {
+      if (preference.matches) videoRef.current?.pause()
+      else videoRef.current?.play().catch(() => {})
+    }
+    sync()
+    preference.addEventListener('change', sync)
+    return () => preference.removeEventListener('change', sync)
+  }, [])
+
+  function togglePlayback() {
+    if (videoRef.current.paused) videoRef.current.play().catch(() => {})
+    else videoRef.current.pause()
+  }
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-teal-50 p-6">
-      <section className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-lg">
-        <h1 className="text-3xl font-bold text-teal-700">
-          Animal Care 🐾
-        </h1>
-
-        <p className="mt-4 text-gray-600">
-          Caring for animals, together.
-        </p>
-
-        <button
-          type="button"
-          className="mt-6 rounded-lg bg-teal-600 px-6 py-3 font-semibold text-white hover:bg-teal-700"
-        >
-          Get Started
-        </button>
+    <main>
+      <section className="hero" aria-labelledby="hero-title">
+        <video ref={videoRef} className="hero-video" muted loop playsInline preload="metadata" poster="/media/hero-dog.jpg" aria-hidden="true" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
+          <source src="/media/hero-dog.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-overlay" />
+        <header className="hero-header">
+          <a className="brand" href="#">Animal Care <span aria-hidden="true">🐾</span></a>
+          <span className="header-note">A little care. A better world.</span>
+        </header>
+        <div className="hero-content">
+          <p className="eyebrow">LOVE. CARE. TOGETHER.</p>
+          <h1 id="hero-title">Every animal<br />deserves a little love.</h1>
+          <p className="hero-description">Caring for animals, together. Help us make their world a happier, kinder place.</p>
+          <a className="hero-cta" href="#get-started">Get Started <span aria-hidden="true">↗</span></a>
+        </div>
+        <div className="hero-footer">
+          <a className="discover" href="#get-started">Discover how you can help ↓</a>
+          <button className="video-toggle" type="button" onClick={togglePlayback} aria-label={playing ? 'Pause background video' : 'Play background video'}>{playing ? 'Pause video Ⅱ' : 'Play video ▶'}</button>
+        </div>
+      </section>
+      <section className="intro" id="get-started" aria-labelledby="intro-title">
+        <p className="eyebrow">SMALL ACTS. BIG DIFFERENCE.</p>
+        <h2 id="intro-title">Care starts with you.</h2>
+        <p>Give an animal your time, your kindness, or a place to call home. Every act of care matters.</p>
       </section>
     </main>
   )
