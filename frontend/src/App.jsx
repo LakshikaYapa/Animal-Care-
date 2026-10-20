@@ -1,5 +1,6 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import Registration from './Registration.jsx'
+import VolunteerRegistration from './VolunteerRegistration.jsx'
 
 function App() {
   const [page, setPage] = useState(window.location.hash)
@@ -13,6 +14,7 @@ function App() {
     return () => window.removeEventListener('hashchange', onNavigate)
   }, [])
 
+  if (page === '#register/volunteer') return <VolunteerRegistration />
   return page === '#register' ? <Registration /> : <Home />
 }
 

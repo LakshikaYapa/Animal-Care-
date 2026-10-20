@@ -9,13 +9,8 @@ const roles = [
 
 export default function Registration() {
   const [role, setRole] = useState('')
-  const [volunteer, setVolunteer] = useState({ fullName: '', address: '', email: '' })
   const selectedRole = roles.find((option) => option.value === role)
 
-  function updateVolunteer(event) {
-    const { name, value } = event.target
-    setVolunteer((previous) => ({ ...previous, [name]: value }))
-  }
 
   return (
     <main className="min-h-svh px-[6%] pt-8 pb-16">
@@ -38,22 +33,7 @@ export default function Registration() {
         </fieldset>
         <p className="mt-6 text-sm text-[#386844]" role="status">{selectedRole ? `Selected role: ${selectedRole.label}` : 'Choose one role to get started.'}</p>
         {role === 'volunteer' && (
-          <fieldset className="mt-8 grid gap-5 border-t border-[#dce4d8] pt-6">
-            <legend className="px-2 text-xl font-medium">Volunteer registration</legend>
-            <p className="text-sm text-[#52655c]">All fields are required.</p>
-            <label className="grid gap-2 text-sm font-medium" htmlFor="volunteer-name">
-              Full name
-              <input className="w-full rounded-xl border border-[#b7c5b4] bg-white px-4 py-3 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="volunteer-name" name="fullName" type="text" autoComplete="name" maxLength={150} required value={volunteer.fullName} onChange={updateVolunteer} />
-            </label>
-            <label className="grid gap-2 text-sm font-medium" htmlFor="volunteer-address">
-              Address
-              <textarea className="min-h-28 w-full resize-y rounded-xl border border-[#b7c5b4] bg-white px-4 py-3 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="volunteer-address" name="address" autoComplete="street-address" rows={3} maxLength={500} required value={volunteer.address} onChange={updateVolunteer} />
-            </label>
-            <label className="grid gap-2 text-sm font-medium" htmlFor="volunteer-email">
-              Email address
-              <input className="w-full rounded-xl border border-[#b7c5b4] bg-white px-4 py-3 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="volunteer-email" name="email" type="email" autoComplete="email" maxLength={254} required value={volunteer.email} onChange={updateVolunteer} />
-            </label>
-          </fieldset>
+          <a className="mt-6 inline-flex rounded-full bg-[#d7edaa] px-7 py-3 text-sm font-bold text-[#173a27] hover:bg-[#e7f7c8] focus-visible:outline-[#386844]" href="#register/volunteer">Continue as Volunteer ?</a>
         )}
       </section>
     </main>
