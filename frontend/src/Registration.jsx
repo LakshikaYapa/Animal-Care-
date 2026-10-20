@@ -23,11 +23,9 @@ export default function Registration() {
               <span className="h-1 w-3 rounded-full bg-white/40" />
               <span className="h-1 w-3 rounded-full bg-white/40" />
             </div>
-            <a className="mt-5 inline-block text-[10px] text-white/75 underline underline-offset-2" href="https://unsplash.com/photos/a-close-up-of-a-golden-retrievers-face-outdoors-wANqTQHVN7o" target="_blank" rel="noreferrer">Photo by Helena Lopes / Unsplash</a>
           </div>
         </aside>
         <div className="min-w-0 p-5 lg:p-6">
-        <p className="text-[11px] font-bold tracking-[2.5px]">JOIN OUR COMMUNITY</p>
         <h1 className="my-3 text-[clamp(26px,2.5vw,34px)] leading-[1.15] font-medium tracking-[-1px]" id="registration-title">How would you like to help?</h1>
         <p className="text-sm leading-relaxed text-[#52655c]">Start by choosing your role. Your registration questions will be tailored to the way you want to help.</p>
         <nav className="mt-4" aria-label="Choose your registration role">
