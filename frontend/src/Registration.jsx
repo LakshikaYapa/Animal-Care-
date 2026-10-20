@@ -4,7 +4,7 @@ const roles = [
   { value: 'volunteer', label: 'Volunteer', description: 'Give your time and skills to help animals.' },
   { value: 'adopter', label: 'Adopter', description: 'Give an animal a loving place to call home.' },
   { value: 'funder', label: 'Funder', description: 'Support animal care through financial contributions.' },
-  { value: 'staff', label: 'Staff Member', description: 'Apply to join the animal care team.' },
+  { value: 'staff', label: 'Staff Member', description: 'Register as an existing member of the animal care team.' },
 ]
 
 export default function Registration() {
