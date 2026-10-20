@@ -1,7 +1,10 @@
 import { useState } from 'react'
 
 export default function AdopterRegistration() {
-  const [adopter, setAdopter] = useState({ fullName: '', address: '', email: '' })
+  const [adopter, setAdopter] = useState({ fullName: '', address: '', email: '', password: '', confirmPassword: '' })
+
+  const [confirmationTouched, setConfirmationTouched] = useState(false)
+  const passwordsMismatch = confirmationTouched && adopter.password !== adopter.confirmPassword
 
   function updateAdopter(event) {
     const { name, value } = event.target
@@ -42,6 +45,16 @@ export default function AdopterRegistration() {
               Email address
               <input className="w-full rounded-xl border border-[#b7c5b4] bg-white px-4 py-3 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="adopter-email" name="email" type="email" autoComplete="email" maxLength={254} required value={adopter.email} onChange={updateAdopter} />
             </label>
+            {[
+              { name: 'password', label: 'Password' },
+              { name: 'confirmPassword', label: 'Confirm password' },
+            ].map((field) => (
+              <label className="grid gap-2 text-sm font-medium" htmlFor={`adopter-${field.name}`} key={field.name}>
+                {field.label}
+                <input className="w-full rounded-xl border border-[#b7c5b4] bg-white px-4 py-3 text-base font-normal focus:border-[#386844] focus:outline-2 focus:outline-offset-2 focus:outline-[#386844] aria-invalid:border-red-600" id={`adopter-${field.name}`} name={field.name} type="password" autoComplete="new-password" required value={adopter[field.name]} onChange={updateAdopter} onBlur={field.name === 'confirmPassword' ? () => setConfirmationTouched(true) : undefined} aria-invalid={field.name === 'confirmPassword' && passwordsMismatch ? true : undefined} aria-describedby={field.name === 'confirmPassword' && passwordsMismatch ? 'adopter-password-error' : undefined} />
+              </label>
+            ))}
+            {passwordsMismatch && <p className="text-sm text-red-700" id="adopter-password-error" role="alert">Passwords do not match.</p>}
           </fieldset>
         </div>
       </section>
