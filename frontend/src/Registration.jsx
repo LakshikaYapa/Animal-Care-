@@ -39,6 +39,7 @@ export default function Registration() {
             ))}
           </div>
         </nav>
+        <p className="mt-6 text-sm text-[#52655c]">Already have an account? <a className="font-bold text-[#386844] underline underline-offset-4 focus-visible:outline-[#386844]" href="#login">Log in</a></p>
         </div>
       </section>
     </main>

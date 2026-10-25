@@ -4,6 +4,7 @@ import VolunteerRegistration from './VolunteerRegistration.jsx'
 import AdopterRegistration from './AdopterRegistration.jsx'
 import StaffRegistration from './StaffRegistration.jsx'
 import FunderRegistration from './FunderRegistration.jsx'
+import Login from './Login.jsx'
 
 function App() {
   const [page, setPage] = useState(window.location.hash)
@@ -17,6 +18,7 @@ function App() {
     return () => window.removeEventListener('hashchange', onNavigate)
   }, [])
 
+  if (page === '#login') return <Login />
   if (page === '#register/volunteer') return <VolunteerRegistration />
   if (page === '#register/adopter') return <AdopterRegistration />
   if (page === '#register/staff') return <StaffRegistration />
@@ -53,7 +55,7 @@ function Home() {
         <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(90deg,#08190fbf,#08190f50)] min-[601px]:bg-[linear-gradient(90deg,#08190fb8,#08190f29),linear-gradient(0deg,#08190f8c,transparent_35%)]" />
         <header className="flex items-center justify-between gap-6 px-[6%] pt-6 pb-8 min-[601px]:pt-8">
           <a className="text-2xl font-bold tracking-[-1px] no-underline" href="#">Animal Care <span className="ml-2" aria-hidden="true">🐾</span></a>
-          <span className="hidden text-[13px] opacity-85 min-[601px]:inline">A little care. A better world.</span>
+          <a className="rounded-full border border-white/60 px-5 py-2.5 text-sm font-bold hover:bg-white/10" href="#login">Log in</a>
         </header>
         <div className="my-auto w-full max-w-220 px-[6%] py-16.25 min-[601px]:py-20">
           <p className="text-[11px] font-bold tracking-[2.5px]">LOVE. CARE. TOGETHER.</p>
