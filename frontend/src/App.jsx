@@ -42,37 +42,64 @@ function Home() {
   }, [])
 
   function togglePlayback() {
-    if (videoRef.current.paused) videoRef.current.play().catch(() => {})
-    else videoRef.current.pause()
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) video.play().catch(() => {})
+    else video.pause()
   }
 
+  const waysToHelp = [
+    { role: 'adopter', title: 'Find your new best friend', description: 'Make room for a little more love.', image: 'adopter-care.jpg', label: 'Adopt', color: 'bg-[#f1e9dc]' },
+    { role: 'volunteer', title: 'Show up. Make tails wag.', description: 'A little of your time goes a long way.', image: 'volunteer-care.jpg', label: 'Volunteer', color: 'bg-[#e6eddf]' },
+    { role: 'funder', title: 'Help good things happen', description: 'Support the care every animal deserves.', image: 'funder-care.jpg', label: 'Support', color: 'bg-[#f4e5e5]' },
+  ]
+
   return (
-    <main>
-      <section className="relative isolate flex min-h-svh flex-col overflow-hidden bg-[#25432b] bg-[url('/media/hero-dog.jpg')] bg-cover bg-position-[center_65%] bg-no-repeat text-white" aria-labelledby="hero-title">
-        <video ref={videoRef} className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_65%]" muted loop playsInline preload="metadata" poster="/media/hero-dog.jpg" aria-hidden="true" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
-          <source src="/media/hero-dog.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(90deg,#08190fbf,#08190f50)] min-[601px]:bg-[linear-gradient(90deg,#08190fb8,#08190f29),linear-gradient(0deg,#08190f8c,transparent_35%)]" />
-        <header className="flex items-center justify-between gap-6 px-[6%] pt-6 pb-8 min-[601px]:pt-8">
-          <a className="text-2xl font-bold tracking-[-1px] no-underline" href="#">Animal Care <span className="ml-2" aria-hidden="true">🐾</span></a>
-          <a className="rounded-full border border-white/60 px-5 py-2.5 text-sm font-bold hover:bg-white/10" href="#login">Log in</a>
-        </header>
-        <div className="my-auto w-full max-w-220 px-[6%] py-16.25 min-[601px]:py-20">
-          <p className="text-[11px] font-bold tracking-[2.5px]">LOVE. CARE. TOGETHER.</p>
-          <h1 className="my-6 text-[clamp(44px,6vw,84px)] leading-[1.06] font-medium tracking-[-1.8px] min-[601px]:tracking-[-3px]" id="hero-title">Every animal<br />deserves a little love.</h1>
-          <p className="max-w-95 text-base leading-[1.7] text-[#edf1e9] min-[601px]:text-[17px]">Caring for animals, together. Help us make their world a happier, kinder place.</p>
-          <a className="mt-5.5 inline-flex items-center gap-10 rounded-[2.5rem] bg-[#d7edaa] px-6.5 py-4.5 text-sm font-bold text-[#173a27] no-underline hover:bg-[#e7f7c8]" href="#register">Get Started <span aria-hidden="true">↗</span></a>
+    <main className="w-full px-3 sm:px-5 lg:px-8">
+      <header className="flex items-center justify-between gap-4 border-b border-[#18372e]/10 py-5">
+        <a className="text-xl font-bold tracking-[-1px] focus-visible:outline-[#386844]" href="#">Animal Care <span aria-hidden="true">{String.fromCodePoint(0x1F43E)}</span></a>
+        <nav className="flex items-center gap-5 text-sm" aria-label="Main navigation">
+          <a className="hidden hover:underline focus-visible:outline-[#386844] sm:block" href="#get-started">Ways to help</a>
+          <a className="rounded-full bg-[#18372e] px-5 py-2.5 font-bold text-white hover:bg-[#386844] focus-visible:outline-[#386844]" href="#login">Log in <span aria-hidden="true">&#8599;</span></a>
+        </nav>
+      </header>
+      <section className="relative isolate my-6 overflow-hidden rounded-[28px] bg-[#25432b] text-white sm:my-8" aria-labelledby="hero-title">
+          <video ref={videoRef} className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_65%]" muted loop playsInline preload="metadata" poster="/media/hero-dog.jpg" aria-hidden="true" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
+            <source src="/media/hero-dog.mp4" type="video/mp4" />
+          </video>
+          <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(9,30,18,0.85),rgba(9,30,18,0.5)_50%,rgba(9,30,18,0.12))]" />
+        <div className="px-6 py-14 sm:px-10 sm:py-16">
+          <p className="mb-4 flex items-center gap-2 text-[10px] font-bold tracking-[2px] text-[#e2efcf]"><span className="h-2 w-2 rounded-full bg-[#d7edaa]" aria-hidden="true" /> LITTLE ACTS. HAPPY TAILS.</p>
+          <h1 className="max-w-120 text-[clamp(36px,4.5vw,52px)] leading-[1.08] font-bold tracking-[-2px]" id="hero-title">Their better day<br />starts with <span className="text-[#d7edaa]">you.</span></h1>
+          <p className="mt-4 max-w-85 text-sm leading-7 text-[#edf1e9]">A home, a helping hand, a little kindness. There&#8217;s a place for everyone at Animal Care.</p>
+          <a className="mt-5 inline-flex items-center gap-6 rounded-full bg-[#d7edaa] px-5 py-3 text-sm font-bold text-[#18372e] hover:bg-[#c6e493]" href="#register">Join the care <span aria-hidden="true">&#8599;</span></a>
         </div>
-        <div className="flex items-end justify-between gap-5 px-[6%] py-7 min-[601px]:items-center">
-          <a className="max-w-38.75 text-xs leading-[1.8] no-underline min-[601px]:max-w-none min-[601px]:leading-normal" href="#get-started">Discover how you can help ↓</a>
-          <button className="cursor-pointer rounded-4xl border border-white/50 bg-[#10251e55] px-4.5 py-3 text-xs text-white" type="button" onClick={togglePlayback} aria-label={playing ? 'Pause background video' : 'Play background video'}>{playing ? 'Pause video Ⅱ' : 'Play video ▶'}</button>
+          <button className="absolute top-3 right-3 cursor-pointer rounded-full border border-white/40 bg-black/45 px-3 py-2 text-xs text-white" type="button" onClick={togglePlayback} aria-label={playing ? 'Pause dog video' : 'Play dog video'}>{playing ? 'Pause' : 'Play'}</button>
+      </section>
+      <section className="scroll-mt-6 pb-8" id="get-started" aria-labelledby="help-title">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-xl font-bold tracking-[-0.5px]" id="help-title">What feels like you?</h2>
+          <p className="text-xs text-[#52655c]">Three ways to make a difference.</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {waysToHelp.map((way) => (
+            <a key={way.role} href={`#register/${way.role}`} className={`group overflow-hidden rounded-2xl border border-[#18372e]/5 ${way.color} transition-transform hover:-translate-y-1 motion-reduce:transform-none focus-visible:outline-[#386844]`}>
+              <div className="relative h-28 overflow-hidden">
+                <img className="h-full w-full object-cover object-center" src={`/media/${way.image}`} alt="" loading="lazy" />
+                <span className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-widest">{way.label}</span>
+              </div>
+              <div className="p-4">
+                <h3 className="flex items-center justify-between gap-2 text-sm font-bold">{way.title}<span aria-hidden="true">&#8599;</span></h3>
+                <p className="mt-2 text-xs leading-5 text-[#52655c]">{way.description}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </section>
-      <section className="max-w-212.5 scroll-mt-7.5 px-[6%] py-20" id="get-started" aria-labelledby="intro-title">
-        <p className="text-[11px] font-bold tracking-[2.5px]">SMALL ACTS. BIG DIFFERENCE.</p>
-        <h2 className="my-4.5 text-[clamp(32px,4vw,48px)] font-medium tracking-[-1px]" id="intro-title">Care starts with you.</h2>
-        <p className="max-w-142.5 text-[17px] leading-[1.8]">Give an animal your time, your kindness, or a place to call home. Every act of care matters.</p>
-      </section>
+      <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-[#18372e]/10 py-4 text-xs text-[#52655c]">
+        <p>A little care. A better world.</p>
+        <a className="underline-offset-4 hover:underline focus-visible:outline-[#386844]" href="#register/staff">Part of the team? Staff registration &#8599;</a>
+      </footer>
     </main>
   )
 }
