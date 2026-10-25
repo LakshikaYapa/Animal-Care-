@@ -16,8 +16,10 @@ export default function FunderRegistration() {
   }, [])
 
   function togglePlayback() {
-    if (videoRef.current.paused) videoRef.current.play().catch(() => {})
-    else videoRef.current.pause()
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) video.play().catch(() => {})
+    else video.pause()
   }
 
   const [funder, setFunder] = useState({ fullName: '', email: '', password: '', confirmPassword: '', funderType: '', organizationName: '', phone: '' })
@@ -36,8 +38,8 @@ export default function FunderRegistration() {
         <a className="text-xl font-bold tracking-[-1px] focus-visible:outline-[#386844] min-[601px]:text-2xl" href="#">Animal Care <span className="ml-2" aria-hidden="true">{String.fromCodePoint(0x1F43E)}</span></a>
         <a className="text-sm underline-offset-4 focus-visible:outline-[#386844]" href="#register">Back to roles</a>
       </header>
-      <section className="mx-auto mt-4 grid w-full max-w-[1120px] flex-1 overflow-hidden rounded-3xl border border-[#dce4d8] bg-white  lg:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.6fr)]" aria-labelledby="funder-title">
-        <aside className="relative isolate min-h-[320px] overflow-hidden bg-[#34503c] lg:min-h-0" aria-label="Supporting a kinder future">
+      <section className="mx-auto mt-4 grid w-full max-w-280 flex-1 overflow-hidden rounded-3xl border border-[#dce4d8] bg-white lg:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.6fr)]" aria-labelledby="funder-title">
+        <aside className="relative isolate min-h-80 overflow-hidden bg-[#34503c] lg:min-h-0" aria-label="Supporting a kinder future">
           <img className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_35%]" src="/media/funder-care.jpg" alt="A glass savings jar with coins against a pink background" width={1080} height={1920} />
           <video ref={videoRef} className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_35%]" muted loop playsInline preload="metadata" poster="/media/funder-care.jpg" aria-hidden="true" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
             <source src="/media/funder-care.mp4" type="video/mp4" />
@@ -50,9 +52,9 @@ export default function FunderRegistration() {
           </div>
         </aside>
         <div className="min-w-0 p-5 lg:p-6">
-        <p className="text-[11px] font-bold tracking-[2.5px]">SUPPORT ANIMAL CARE</p>
-        <h1 className="my-3 text-[clamp(26px,2.5vw,34px)] leading-[1.15] font-medium tracking-[-1px]" id="funder-title">Funder registration</h1>
-        <p className="text-sm leading-relaxed text-[#52655c]">Register as an individual or organization and help fund a brighter future for animals.</p>
+          <p className="text-[11px] font-bold tracking-[2.5px]">SUPPORT ANIMAL CARE</p>
+          <h1 className="my-3 text-[clamp(26px,2.5vw,34px)] leading-[1.15] font-medium tracking-[-1px]" id="funder-title">Funder registration</h1>
+          <p className="text-sm leading-relaxed text-[#52655c]">Register as an individual or organization and help fund a brighter future for animals.</p>
           <fieldset className="mt-4 grid gap-3 border-t border-[#dce4d8] pt-3 sm:grid-cols-2">
             <legend className="px-2 text-xl font-medium">Funder details</legend>
             <p className="text-sm text-[#52655c] sm:col-span-2">All fields are required except phone number.</p>

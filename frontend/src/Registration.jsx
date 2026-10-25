@@ -12,8 +12,8 @@ export default function Registration() {
         <a className="text-xl font-bold tracking-[-1px] no-underline focus-visible:outline-[#386844] min-[601px]:text-2xl" href="#">Animal Care <span className="ml-2" aria-hidden="true">🐾</span></a>
         <a className="text-sm underline-offset-4 focus-visible:outline-[#386844]" href="#">Back to home</a>
       </header>
-      <section className="mx-auto mt-4 grid w-full max-w-[1120px] flex-1 overflow-hidden rounded-3xl border border-[#dce4d8] bg-white  lg:grid-cols-[340px_minmax(0,1fr)]" aria-labelledby="registration-title">
-        <aside className="relative isolate min-h-[280px] overflow-hidden bg-[#34503c] lg:min-h-0" aria-label="A happier world for animals">
+      <section className="mx-auto mt-4 grid w-full max-w-280 flex-1 overflow-hidden rounded-3xl border border-[#dce4d8] bg-white  lg:grid-cols-[340px_minmax(0,1fr)]" aria-labelledby="registration-title">
+        <aside className="relative isolate min-h-70 overflow-hidden bg-[#34503c] lg:min-h-0" aria-label="A happier world for animals">
           <img className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_35%]" src="/media/registration-dog.jpg" alt="Golden retriever outdoors" width={900} height={1200} />
           <div className="absolute inset-0 -z-10 bg-linear-to-t from-[#10291be6] via-transparent to-transparent" />
           <div className="absolute inset-x-0 bottom-0 px-8 pb-8 text-center text-white lg:pb-12">
