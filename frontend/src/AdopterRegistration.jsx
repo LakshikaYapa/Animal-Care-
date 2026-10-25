@@ -1,3 +1,4 @@
+import ThemeToggle from './ThemeToggle.jsx'
 import { useState } from 'react'
 
 export default function AdopterRegistration() {
@@ -13,9 +14,12 @@ export default function AdopterRegistration() {
 
   return (
     <main className="flex min-h-svh flex-col px-[4%] py-4">
-      <header className="flex items-center justify-between gap-6">
+      <header className="flex flex-wrap items-center justify-between gap-3">
         <a className="text-xl font-bold tracking-[-1px] focus-visible:outline-[#386844] min-[601px]:text-2xl" href="#">Animal Care <span className="ml-2" aria-hidden="true">{String.fromCodePoint(0x1F43E)}</span></a>
+        <div className="flex items-center gap-3 sm:gap-5">
         <a className="text-sm underline-offset-4 focus-visible:outline-[#386844]" href="#register">Back to roles</a>
+          <ThemeToggle />
+        </div>
       </header>
       <section className="mx-auto mt-4 grid w-full max-w-280 flex-1 overflow-hidden rounded-3xl border border-[#dce4d8] bg-white lg:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.6fr)]" aria-labelledby="adopter-title">
         <aside className="relative isolate min-h-80 overflow-hidden bg-[#34503c] lg:min-h-0" aria-label="Give a shelter dog a home">

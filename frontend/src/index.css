@@ -19,24 +19,19 @@
 body {
   background-color: var(--page);
   color: var(--ink);
-  padding-bottom: 76px;
 }
 
 .theme-toggle {
-  position: fixed;
-  right: 20px;
-  bottom: 18px;
-  z-index: 50;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 44px;
-  padding: 10px 16px;
+  padding: 10px;
+  flex-shrink: 0;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--surface);
   color: var(--ink);
-  box-shadow: 0 4px 18px #0002;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
@@ -82,4 +77,10 @@ html[data-theme='dark'] .text-red-700 { color: #fca5a5; }
   button:focus-visible {
     @apply outline-3 outline-offset-[5px] outline-[#d7edaa];
   }
+}
+
+.theme-toggle span { display: none; }
+@media (min-width: 640px) {
+  .theme-toggle { padding-inline: 14px; }
+  .theme-toggle span { display: inline; }
 }

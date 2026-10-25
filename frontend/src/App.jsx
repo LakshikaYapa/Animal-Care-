@@ -1,4 +1,5 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import ThemeToggle from './ThemeToggle.jsx'
+import { useEffect, useRef, useState } from 'react'
 import Registration from './Registration.jsx'
 import VolunteerRegistration from './VolunteerRegistration.jsx'
 import AdopterRegistration from './AdopterRegistration.jsx'
@@ -58,10 +59,11 @@ function Home() {
     <main className="w-full px-3 sm:px-5 lg:px-8">
       <header className="flex items-center justify-between gap-4 border-b border-[#18372e]/10 py-5">
         <a className="flex items-center gap-3 focus-visible:outline-[#386844]" href="#"><span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#e4edda] text-xl" aria-hidden="true">{String.fromCodePoint(0x1F43E)}</span><span><span className="block text-xl font-bold tracking-[-1px]">Animal Care</span><span className="block text-[9px] font-medium tracking-[2px] text-[#52655c]">KINDNESS IN ACTION</span></span></a>
-        <nav className="flex items-center gap-5 text-sm" aria-label="Main navigation">
+        <nav className="flex items-center gap-2 text-sm sm:gap-5" aria-label="Main navigation">
           <a className="hidden hover:underline focus-visible:outline-[#386844] sm:block" href="#get-started">Ways to help</a>
           <a className="hidden hover:underline focus-visible:outline-[#386844] md:block" href="#how-it-works">How it works</a>
           <a className="rounded-full bg-[#18372e] px-5 py-2.5 font-bold text-white hover:bg-[#386844] focus-visible:outline-[#386844]" href="#login">Log in <span aria-hidden="true">&#8599;</span></a>
+          <ThemeToggle />
         </nav>
       </header>
       <section className="relative isolate my-6 overflow-hidden rounded-[28px] bg-[#25432b] text-white sm:my-8" aria-labelledby="hero-title">
