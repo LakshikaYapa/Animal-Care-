@@ -6,6 +6,8 @@ import AdopterRegistration from './AdopterRegistration.jsx'
 import StaffRegistration from './StaffRegistration.jsx'
 import FunderRegistration from './FunderRegistration.jsx'
 import Login from './Login.jsx'
+import MultiRoleRegistration from './MultiRoleRegistration.jsx'
+import { selectedRolesFromHash } from './registrationRoles.js'
 
 function App() {
   const [page, setPage] = useState(window.location.hash)
@@ -20,11 +22,15 @@ function App() {
   }, [])
 
   if (page === '#login') return <Login />
+  if (page.startsWith('#register/details?')) {
+    const roles = selectedRolesFromHash(page)
+    return roles.length ? <MultiRoleRegistration key={page} roles={roles} /> : <Registration />
+  }
   if (page === '#register/volunteer') return <VolunteerRegistration />
   if (page === '#register/adopter') return <AdopterRegistration />
   if (page === '#register/staff') return <StaffRegistration />
   if (page === '#register/funder') return <FunderRegistration />
-  return page === '#register' ? <Registration /> : <Home />
+  return page.split('?')[0] === '#register' ? <Registration key={page} /> : <Home />
 }
 
 function Home() {
