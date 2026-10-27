@@ -6,6 +6,7 @@ export const registrationRoles = [
 ]
 
 export function selectedRolesFromHash(hash) {
-  const requested = new URLSearchParams(hash.split('?')[1]).get('roles')?.split(',') || []
+  const directRole = hash.split('?')[0].replace('#register/', '')
+  const requested = new URLSearchParams(hash.split('?')[1]).get('roles')?.split(',') || [directRole]
   return registrationRoles.filter((role) => requested.includes(role.value))
 }

@@ -40,12 +40,12 @@ export default function Registration() {
             {roles.map((option) => (
               <label className="flex cursor-pointer items-start gap-3 rounded-[14px] border-2 border-[#e0e6dc] p-4 hover:border-[#90ad7b] hover:bg-[#f0f7e8] has-checked:border-[#90ad7b] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-[#386844]" key={option.value}>
                 <input className="mt-1 h-4 w-4 shrink-0 accent-[#386844]" type="checkbox" name="roles" value={option.value} checked={selectedRoles.includes(option.value)} onChange={() => toggleRole(option.value)} />
-                <span className="min-w-0 flex-1"><strong>{option.label}</strong><span className="mt-2 block text-sm leading-[1.6] text-[#52655c]">{option.description}</span></span>
+                <span className="min-w-0 flex-1"><strong>{option.label}</strong><span className="mt-2 block text-sm leading-[1.6] text-[#52655c]">{option.description}</span>{selectedRoles.includes(option.value) && <span className="mt-2 block text-xs font-bold text-[#386844]">Selected</span>}</span>
               </label>
             ))}
           </div>
         </fieldset>
-        <p className="mt-4 text-sm text-[#52655c]" role="status">{selectedRoles.length ? `${selectedRoles.length} role${selectedRoles.length === 1 ? '' : 's'} selected` : 'Select at least one role to continue.'}</p>
+        <p className="mt-4 text-sm text-[#52655c]" role="status">{selectedRoles.length ? `Selected: ${roles.filter((role) => selectedRoles.includes(role.value)).map((role) => role.label).join(', ')}` : 'Select at least one role to continue.'}</p>
         <button className="mt-4 rounded-full bg-[#d7edaa] px-6 py-3 text-sm font-bold text-[#18372e] enabled:cursor-pointer enabled:hover:bg-[#c6e493] disabled:cursor-not-allowed disabled:opacity-50" type="button" disabled={!selectedRoles.length} onClick={() => { window.location.hash = `register/details?roles=${roles.filter((role) => selectedRoles.includes(role.value)).map((role) => role.value).join(',')}` }}>Continue <span aria-hidden="true">&rarr;</span></button>
         <p className="mt-6 text-sm text-[#52655c]">Already have an account? <a className="font-bold text-[#386844] underline underline-offset-4 focus-visible:outline-[#386844]" href="#login">Log in</a></p>
         </div>

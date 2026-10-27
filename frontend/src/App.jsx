@@ -1,10 +1,6 @@
 import ThemeToggle from './ThemeToggle.jsx'
 import { useEffect, useRef, useState } from 'react'
 import Registration from './Registration.jsx'
-import VolunteerRegistration from './VolunteerRegistration.jsx'
-import AdopterRegistration from './AdopterRegistration.jsx'
-import StaffRegistration from './StaffRegistration.jsx'
-import FunderRegistration from './FunderRegistration.jsx'
 import Login from './Login.jsx'
 import MultiRoleRegistration from './MultiRoleRegistration.jsx'
 import { selectedRolesFromHash } from './registrationRoles.js'
@@ -26,10 +22,7 @@ function App() {
     const roles = selectedRolesFromHash(page)
     return roles.length ? <MultiRoleRegistration key={page} roles={roles} /> : <Registration />
   }
-  if (page === '#register/volunteer') return <VolunteerRegistration />
-  if (page === '#register/adopter') return <AdopterRegistration />
-  if (page === '#register/staff') return <StaffRegistration />
-  if (page === '#register/funder') return <FunderRegistration />
+  if (['#register/volunteer', '#register/adopter', '#register/staff', '#register/funder'].includes(page.split('?')[0])) return <Registration key={page} />
   return page.split('?')[0] === '#register' ? <Registration key={page} /> : <Home />
 }
 
