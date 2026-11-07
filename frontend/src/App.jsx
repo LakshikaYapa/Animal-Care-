@@ -60,7 +60,6 @@ function Home() {
         <a className="flex items-center gap-3 focus-visible:outline-[#386844]" href="#"><span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#e4edda] text-xl" aria-hidden="true">{String.fromCodePoint(0x1F43E)}</span><span><span className="block text-xl font-bold tracking-[-1px]">Animal Care</span><span className="block text-[9px] font-medium tracking-[2px] text-[#52655c]">KINDNESS IN ACTION</span></span></a>
         <nav className="flex items-center gap-2 text-sm sm:gap-5" aria-label="Main navigation">
           <a className="hidden hover:underline focus-visible:outline-[#386844] sm:block" href="#get-started">Ways to help</a>
-          <a className="hidden hover:underline focus-visible:outline-[#386844] md:block" href="#how-it-works">How it works</a>
           <a className="rounded-full bg-[#18372e] px-5 py-2.5 font-bold text-white hover:bg-[#386844] focus-visible:outline-[#386844]" href="#login">Log in <span aria-hidden="true">&#8599;</span></a>
           <ThemeToggle />
         </nav>
@@ -103,29 +102,6 @@ function Home() {
             </a>
           ))}
         </div>
-      </section>
-      <section className="mb-8 grid scroll-mt-6 gap-6 rounded-3xl border border-[#dce4d8] bg-[#edf1e7] p-6 md:grid-cols-[0.8fr_2fr] md:gap-10 md:p-8" id="how-it-works" aria-labelledby="steps-title">
-        <div>
-          <p className="text-[10px] font-bold tracking-[2px] text-[#63833e]">YOUR NEXT CHAPTER</p>
-          <h2 className="mt-3 text-2xl font-bold leading-tight tracking-[-0.7px]" id="steps-title">Good things start<br />with one small step.</h2>
-        </div>
-        <ol className="grid gap-6 sm:grid-cols-3">
-          {[
-            { title: 'Find your place', text: 'Choose to adopt, volunteer, or support animal care.' },
-            { title: 'Introduce yourself', text: 'Create an account with the details for your chosen role.' },
-            { title: 'Begin your journey', text: 'Take the first step toward making animal care part of your life.' },
-          ].map((step, index) => (
-            <li key={step.title}>
-              <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#b7c5b4] text-xs font-bold">0{index + 1}</span>
-              <h3 className="text-sm font-bold">{step.title}</h3>
-              <p className="mt-2 text-xs leading-6 text-[#52655c]">{step.text}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-      <section className="mb-8 flex flex-wrap items-center justify-between gap-5 rounded-3xl bg-[#18372e] px-6 py-7 text-white sm:px-8" aria-labelledby="join-title">
-        <div><p className="mb-2 text-[10px] font-bold tracking-[2px] text-[#d7edaa]">THERE'S ROOM FOR YOU HERE</p><h2 className="text-xl font-medium tracking-[-0.5px] sm:text-2xl" id="join-title">Be someone&#8217;s reason for a better tomorrow.</h2></div>
-        <a className="inline-flex items-center gap-6 rounded-full bg-[#d7edaa] px-5 py-3 text-sm font-bold text-[#18372e] hover:bg-[#e7f7c8]" href="#register">Find your role <span aria-hidden="true">&#8599;</span></a>
       </section>
       <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-[#18372e]/10 py-4 text-xs text-[#52655c]">
         <p>A little care. A better world.</p>
