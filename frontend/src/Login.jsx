@@ -1,3 +1,4 @@
+import ThemeToggle from './ThemeToggle.jsx'
 import { useState } from 'react'
 
 export default function Login() {
@@ -18,9 +19,12 @@ export default function Login() {
 
   return (
     <main className="flex min-h-svh flex-col px-[4%] py-4">
-      <header className="flex items-center justify-between gap-6">
+      <header className="flex flex-wrap items-center justify-between gap-3">
         <a className="text-xl font-bold tracking-[-1px] focus-visible:outline-[#386844] min-[601px]:text-2xl" href="#">Animal Care <span className="ml-2" aria-hidden="true">🐾</span></a>
+        <div className="flex items-center gap-3 sm:gap-5">
         <a className="text-sm underline-offset-4 focus-visible:outline-[#386844]" href="#">Back to home</a>
+          <ThemeToggle />
+        </div>
       </header>
       <section className="mx-auto mt-4 grid w-full max-w-280 flex-1 overflow-hidden rounded-3xl border border-[#dce4d8] bg-white lg:grid-cols-2" aria-labelledby="login-title">
         <aside className="relative isolate min-h-64 overflow-hidden bg-[#34503c] lg:min-h-0">

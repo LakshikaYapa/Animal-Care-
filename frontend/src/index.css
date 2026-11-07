@@ -1,5 +1,69 @@
 @import "tailwindcss" source(".");
 
+:root {
+  color-scheme: light;
+  --page: #f7f7ef;
+  --surface: #fff;
+  --ink: #18372e;
+  --line: #b7c5b4;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #101b16;
+  --surface: #1b2a22;
+  --ink: #e7eee4;
+  --line: #4a6051;
+}
+
+body {
+  background-color: var(--page);
+  color: var(--ink);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.theme-toggle:hover { border-color: #749650; }
+.theme-toggle:focus-visible { outline-color: #749650; }
+
+/* Map the shared page palette while preserving photos, video overlays and CTA colors. */
+html[data-theme='dark'] :is(.bg-white, .bg-\[\#f1e9dc\], .bg-\[\#e6eddf\], .bg-\[\#f4e5e5\], .bg-\[\#edf1e7\], .bg-\[\#e4edda\]) {
+  background-color: var(--surface);
+}
+
+html[data-theme='dark'] :is(.text-\[\#52655c\], .text-\[\#386844\], .text-\[\#63833e\]) {
+  color: #b8ccae;
+}
+
+html[data-theme='dark'] :is(input, select, textarea) {
+  background-color: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+html[data-theme='dark'] :is(.border-\[\#dce4d8\], .border-\[\#b7c5b4\], .border-\[\#e0e6dc\]) {
+  border-color: var(--line);
+}
+
+html[data-theme='dark'] [class*='border-[#18372e]/'] { border-color: #e7eee426; }
+html[data-theme='dark'] .bg-white\/95 { color: #18372e; }
+html[data-theme='dark'] :is(.hover\:bg-\[\#f0f7e8\], .hover\:bg-\[\#eaf1df\]):hover { background-color: #2b4032; }
+html[data-theme='dark'] .text-red-700 { color: #fca5a5; }
+
 @layer base {
   html {
     @apply scroll-smooth motion-reduce:scroll-auto;
@@ -13,4 +77,10 @@
   button:focus-visible {
     @apply outline-3 outline-offset-[5px] outline-[#d7edaa];
   }
+}
+
+.theme-toggle span { display: none; }
+@media (min-width: 640px) {
+  .theme-toggle { padding-inline: 14px; }
+  .theme-toggle span { display: inline; }
 }
