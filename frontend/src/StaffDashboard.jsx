@@ -20,6 +20,39 @@ export default function StaffDashboard() {
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" id="staff-dashboard-title">Staff Dashboard</h1>
           <p className="mt-3 max-w-xl text-sm leading-7 text-[#52655c]">A shared space to coordinate animal care and support the people who make it possible.</p>
         </section>
+
+        <section className="pb-8" aria-labelledby="quick-actions-title">
+          <h2 className="text-lg font-bold" id="quick-actions-title">Quick actions</h2>
+          <p className="mt-1 text-sm text-[#52655c]">Keep everyday care and adoption requests in view.</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <article className="rounded-2xl border border-[#18372e]/10 bg-white p-5 sm:p-6" aria-labelledby="animals-title">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e4edda] text-[#386844]" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <ellipse cx="7" cy="7" rx="2" ry="3" />
+                  <ellipse cx="17" cy="7" rx="2" ry="3" />
+                  <ellipse cx="3.5" cy="12" rx="1.5" ry="2" />
+                  <ellipse cx="20.5" cy="12" rx="1.5" ry="2" />
+                  <path d="M7 20c-3 0-3-4-1-5l3-3a4 4 0 0 1 6 0l3 3c2 1 2 5-1 5-2 0-3-1-5-1s-3 1-5 1Z" />
+                </svg>
+              </span>
+              <h3 className="mt-4 text-lg font-bold" id="animals-title">Animals</h3>
+              <p className="mt-2 text-sm leading-6 text-[#52655c]">A place for animal profiles, care details, and adoption availability.</p>
+              <p className="mt-5 text-xs font-medium text-[#63833e]">Coming soon</p>
+            </article>
+            <article className="rounded-2xl border border-[#18372e]/10 bg-white p-5 sm:p-6" aria-labelledby="requests-title">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e4edda] text-[#386844]" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="5" y="4" width="14" height="18" rx="2" />
+                  <rect x="9" y="2" width="6" height="4" rx="1" />
+                  <path d="M9 11h6M9 15h6M9 19h3" />
+                </svg>
+              </span>
+              <h3 className="mt-4 text-lg font-bold" id="requests-title">Adoption requests</h3>
+              <p className="mt-2 text-sm leading-6 text-[#52655c]">A place to review applications and follow each animal’s journey to a new home.</p>
+              <p className="mt-5 text-xs font-medium text-[#63833e]">Coming soon</p>
+            </article>
+          </div>
+        </section>
       </div>
     </main>
   )
