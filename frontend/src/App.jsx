@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import Registration from './Registration.jsx'
 import Login from './Login.jsx'
 import StaffDashboard from './StaffDashboard.jsx'
+import MemberDashboard from './MemberDashboard.jsx'
 import MultiRoleRegistration from './MultiRoleRegistration.jsx'
 import { selectedRolesFromHash } from './registrationRoles.js'
 
@@ -19,6 +20,7 @@ function App() {
   }, [])
 
   if (page === '#staff/dashboard') return <StaffDashboard />
+  if (page === '#dashboard') return <MemberDashboard />
   if (page === '#login') return <Login />
   if (page.startsWith('#register/details?')) {
     const roles = selectedRolesFromHash(page)
