@@ -2,6 +2,7 @@ import ThemeToggle from './ThemeToggle.jsx'
 import { useEffect, useRef, useState } from 'react'
 import Registration from './Registration.jsx'
 import Login from './Login.jsx'
+import StaffDashboard from './StaffDashboard.jsx'
 import MultiRoleRegistration from './MultiRoleRegistration.jsx'
 import { selectedRolesFromHash } from './registrationRoles.js'
 
@@ -17,6 +18,7 @@ function App() {
     return () => window.removeEventListener('hashchange', onNavigate)
   }, [])
 
+  if (page === '#staff/dashboard') return <StaffDashboard />
   if (page === '#login') return <Login />
   if (page.startsWith('#register/details?')) {
     const roles = selectedRolesFromHash(page)
