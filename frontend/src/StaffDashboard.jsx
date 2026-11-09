@@ -23,8 +23,8 @@ export default function StaffDashboard() {
 
         <section className="pb-8" aria-labelledby="quick-actions-title">
           <h2 className="text-lg font-bold" id="quick-actions-title">Quick actions</h2>
-          <p className="mt-1 text-sm text-[#52655c]">Keep everyday care and adoption requests in view.</p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <p className="mt-1 text-sm text-[#52655c]">Keep animal care, adoption requests, and volunteer support in view.</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <article className="rounded-2xl border border-[#18372e]/10 bg-white p-5 sm:p-6" aria-labelledby="animals-title">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e4edda] text-[#386844]" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
@@ -49,6 +49,17 @@ export default function StaffDashboard() {
               </span>
               <h3 className="mt-4 text-lg font-bold" id="requests-title">Adoption requests</h3>
               <p className="mt-2 text-sm leading-6 text-[#52655c]">A place to review applications and follow each animal’s journey to a new home.</p>
+              <p className="mt-5 text-xs font-medium text-[#63833e]">Coming soon</p>
+            </article>
+            <article className="rounded-2xl border border-[#18372e]/10 bg-white p-5 sm:p-6" aria-labelledby="volunteers-title">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e4edda] text-[#386844]" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="9" cy="8" r="3" />
+                  <path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M21 21v-2a6 6 0 0 0-4-5.66" />
+                </svg>
+              </span>
+              <h3 className="mt-4 text-lg font-bold" id="volunteers-title">Volunteers</h3>
+              <p className="mt-2 text-sm leading-6 text-[#52655c]">A place to coordinate volunteer shifts, assign care tasks, and support the team.</p>
               <p className="mt-5 text-xs font-medium text-[#63833e]">Coming soon</p>
             </article>
           </div>
