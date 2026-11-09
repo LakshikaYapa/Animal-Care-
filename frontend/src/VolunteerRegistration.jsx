@@ -1,7 +1,7 @@
 import ThemeToggle from './ThemeToggle.jsx'
 import { useState } from 'react'
 
-export default function VolunteerRegistration() {
+export default function VolunteerRegistration({ onValuesChange, onSubmitRole, isSubmitting, isComplete, submitLabel }) {
   const [volunteer, setVolunteer] = useState({ fullName: '', address: '', email: '', password: '', confirmPassword: '' })
   const [photoUnavailable, setPhotoUnavailable] = useState(false)
 
@@ -10,7 +10,18 @@ export default function VolunteerRegistration() {
 
   function updateVolunteer(event) {
     const { name, value } = event.target
-    setVolunteer((previous) => ({ ...previous, [name]: value }))
+    const next = { ...volunteer, [name]: value }
+    setVolunteer(next)
+    onValuesChange('volunteer', next)
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    if (volunteer.password !== volunteer.confirmPassword) {
+      setConfirmationTouched(true)
+      return
+    }
+    await onSubmitRole('volunteer', volunteer)
   }
 
   return (
@@ -37,7 +48,8 @@ export default function VolunteerRegistration() {
         <p className="text-[11px] font-bold tracking-[2.5px]">JOIN AS A VOLUNTEER</p>
         <h1 className="my-3 text-[clamp(26px,2.5vw,34px)] leading-[1.15] font-medium tracking-[-1px]" id="volunteer-title">Volunteer registration</h1>
         <p className="text-sm leading-relaxed text-[#52655c]">Tell us about yourself and help us care for animals together.</p>
-          <fieldset className="mt-4 grid gap-3 border-t border-[#dce4d8] pt-3 sm:grid-cols-2">
+          <form className="mt-4" onSubmit={handleSubmit}>
+          <fieldset disabled={isSubmitting || isComplete} className="grid gap-3 border-t border-[#dce4d8] pt-3 sm:grid-cols-2">
             <legend className="px-2 text-xl font-medium">Volunteer registration</legend>
             <p className="text-sm text-[#52655c] sm:col-span-2">All fields are required.</p>
             <label className="grid content-start gap-1 text-sm font-medium" htmlFor="volunteer-name">
@@ -63,6 +75,10 @@ export default function VolunteerRegistration() {
             ))}
             {passwordsMismatch && <p className="text-sm text-red-700 sm:col-span-2" id="volunteer-password-error" role="alert">Passwords do not match.</p>}
           </fieldset>
+          <button className="mt-4 w-full rounded-full bg-[#d7edaa] px-6 py-3 text-sm font-bold text-[#18372e] enabled:cursor-pointer enabled:hover:bg-[#c6e493] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto" type="submit" disabled={isSubmitting || isComplete}>
+            {isSubmitting ? 'Creating account…' : isComplete ? 'Account created' : submitLabel}
+          </button>
+          </form>
         </div>
       </section>
     </main>
