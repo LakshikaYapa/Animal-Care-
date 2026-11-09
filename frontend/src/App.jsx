@@ -4,6 +4,7 @@ import Registration from './Registration.jsx'
 import Login from './Login.jsx'
 import MultiRoleRegistration from './MultiRoleRegistration.jsx'
 import { selectedRolesFromHash } from './registrationRoles.js'
+import { useAuth } from './auth/AuthContext.js'
 
 function App() {
   const [page, setPage] = useState(window.location.hash)
@@ -27,8 +28,20 @@ function App() {
 }
 
 function Home() {
+  const { user, isLoading, logout } = useAuth()
   const videoRef = useRef(null)
   const [playing, setPlaying] = useState(false)
+  const [authNotice, setAuthNotice] = useState('')
+
+  async function handleLogout() {
+    setAuthNotice('')
+    try {
+      await logout()
+      setAuthNotice('You have been logged out.')
+    } catch (error) {
+      setAuthNotice(error.message)
+    }
+  }
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -60,10 +73,20 @@ function Home() {
         <a className="flex items-center gap-3 focus-visible:outline-[#386844]" href="#"><span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#e4edda] text-xl" aria-hidden="true">{String.fromCodePoint(0x1F43E)}</span><span><span className="block text-xl font-bold tracking-[-1px]">Animal Care</span><span className="block text-[9px] font-medium tracking-[2px] text-[#52655c]">KINDNESS IN ACTION</span></span></a>
         <nav className="flex items-center gap-2 text-sm sm:gap-5" aria-label="Main navigation">
           <a className="hidden hover:underline focus-visible:outline-[#386844] sm:block" href="#get-started">Ways to help</a>
-          <a className="rounded-full bg-[#18372e] px-5 py-2.5 font-bold text-white hover:bg-[#386844] focus-visible:outline-[#386844]" href="#login">Log in <span aria-hidden="true">&#8599;</span></a>
+          {isLoading ? (
+            <span className="text-xs text-[#52655c]" role="status">Checking session…</span>
+          ) : user ? (
+            <div className="flex items-center gap-2 sm:gap-4">
+              <span className="hidden max-w-36 truncate text-sm font-medium sm:inline" title={user.fullName}>Hi, {user.fullName}</span>
+              <button className="rounded-full bg-[#18372e] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#386844] focus-visible:outline-[#386844]" type="button" onClick={handleLogout}>Log out</button>
+            </div>
+          ) : (
+            <a className="rounded-full bg-[#18372e] px-5 py-2.5 font-bold text-white hover:bg-[#386844] focus-visible:outline-[#386844]" href="#login">Log in <span aria-hidden="true">&#8599;</span></a>
+          )}
           <ThemeToggle />
         </nav>
       </header>
+      {authNotice && <p className="mt-3 text-sm text-[#52655c]" role="status" aria-live="polite">{authNotice}</p>}
       <section className="relative isolate my-6 overflow-hidden rounded-[28px] bg-[#25432b] text-white sm:my-8" aria-labelledby="hero-title">
           <video ref={videoRef} className="absolute inset-0 -z-20 h-full w-full object-cover object-[center_65%]" muted loop playsInline preload="metadata" poster="/media/hero-dog.jpg" aria-hidden="true" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
             <source src="/media/hero-dog.mp4" type="video/mp4" />
