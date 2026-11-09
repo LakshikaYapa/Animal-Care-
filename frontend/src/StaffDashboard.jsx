@@ -12,7 +12,25 @@ export default function StaffDashboard() {
               <span className="block text-xs text-[#52655c]">Staff workspace</span>
             </span>
           </a>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <details className="group relative">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-[#18372e]/10 px-3 py-2 text-sm font-medium focus-visible:outline-[#386844] [&::-webkit-details-marker]:hidden">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#e4edda] text-[#386844]" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21v-1a8 8 0 0 1 16 0v1" />
+                  </svg>
+                </span>
+                Staff
+                <svg className="transition-transform group-open:rotate-180 motion-reduce:transition-none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </summary>
+              <nav className="absolute right-0 z-20 mt-2 w-52 rounded-2xl border border-[#18372e]/10 bg-white p-2 shadow-lg" aria-label="Staff navigation">
+                <a className="block rounded-xl bg-[#e4edda] px-3 py-2.5 text-sm font-medium focus-visible:outline-[#386844]" href="#staff/dashboard" aria-current="page" onClick={(event) => { event.currentTarget.closest('details').open = false }}>Dashboard</a>
+                <a className="mt-1 block rounded-xl px-3 py-2.5 text-sm hover:underline focus-visible:outline-[#386844]" href="#">Back to home <span aria-hidden="true">&#8599;</span></a>
+              </nav>
+            </details>
+          </div>
         </header>
 
         <section className="py-9 sm:py-12" aria-labelledby="staff-dashboard-title">
