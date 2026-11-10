@@ -1,11 +1,15 @@
 import ThemeToggle from './ThemeToggle.jsx'
 import { useState } from 'react'
+import { useAuth } from './auth/AuthContext.js'
 
 export default function Login() {
+  const { login } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [message, setMessage] = useState('')
+  const [messageType, setMessageType] = useState('status')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const form = event.currentTarget
     const identifier = form.elements.identifier
@@ -14,7 +18,20 @@ export default function Login() {
       identifier.reportValidity()
       return
     }
-    setMessage('Sign-in is not available yet. Please try again once account sign-in has been connected.')
+
+    setIsSubmitting(true)
+    setMessage('')
+    try {
+      await login({ identifier: identifier.value.trim(), password: form.elements.password.value })
+      setMessageType('status')
+      setMessage('Login successful.')
+      window.location.hash = ''
+    } catch (error) {
+      setMessageType('error')
+      setMessage(error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -39,20 +56,20 @@ export default function Login() {
           <p className="text-[11px] font-bold tracking-[2.5px]">WELCOME BACK</p>
           <h1 className="my-3 text-[clamp(30px,3vw,40px)] leading-[1.15] font-medium tracking-[-1px]" id="login-title">Log in to Animal Care</h1>
           <p className="text-sm leading-relaxed text-[#52655c]">Continue your journey of caring for animals.</p>
-          <form className="mt-8 grid gap-5" onSubmit={handleSubmit} onInput={() => setMessage('')}>
+          <form className="mt-8 grid gap-5" onSubmit={handleSubmit} onInput={() => setMessage('')} aria-busy={isSubmitting}>
             <label className="grid gap-2 text-sm font-medium" htmlFor="login-identifier">
               Username or email
-              <input className="w-full rounded-xl border border-[#b7c5b4] px-4 py-3 text-base font-normal focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="login-identifier" name="identifier" type="text" autoComplete="username" autoCapitalize="none" spellCheck={false} placeholder="Enter your username or email" required onChange={(event) => event.target.setCustomValidity('')} />
+              <input className="w-full rounded-xl border border-[#b7c5b4] px-4 py-3 text-base font-normal focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="login-identifier" name="identifier" type="text" autoComplete="username" autoCapitalize="none" spellCheck={false} placeholder="Enter your staff ID or email" required disabled={isSubmitting} onChange={(event) => event.target.setCustomValidity('')} />
             </label>
             <div>
               <label className="mb-2 block text-sm font-medium" htmlFor="login-password">Password</label>
               <div className="relative">
-                <input className="w-full rounded-xl border border-[#b7c5b4] py-3 pr-20 pl-4 text-base focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="login-password" name="password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" placeholder="Enter your password" required />
-                <button className="absolute inset-y-0 right-2 my-1 cursor-pointer rounded-lg px-3 text-sm font-medium text-[#386844] focus-visible:outline-[#386844]" type="button" aria-controls="login-password" aria-label={showPassword ? 'Hide password' : 'Show password'} aria-pressed={showPassword} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? 'Hide' : 'Show'}</button>
+                <input className="w-full rounded-xl border border-[#b7c5b4] py-3 pr-20 pl-4 text-base focus:outline-2 focus:outline-offset-2 focus:outline-[#386844]" id="login-password" name="password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" placeholder="Enter your password" required disabled={isSubmitting} />
+                <button className="absolute inset-y-0 right-2 my-1 cursor-pointer rounded-lg px-3 text-sm font-medium text-[#386844] focus-visible:outline-[#386844]" type="button" aria-controls="login-password" aria-label={showPassword ? 'Hide password' : 'Show password'} aria-pressed={showPassword} disabled={isSubmitting} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? 'Hide' : 'Show'}</button>
               </div>
             </div>
-            <button className="cursor-pointer rounded-full bg-[#d7edaa] px-6 py-3.5 text-sm font-bold text-[#173a27] hover:bg-[#c6e493] focus-visible:outline-[#386844]" type="submit">Log in</button>
-            <p className="text-sm leading-relaxed text-[#52655c]" role="status">{message}</p>
+            <button className="cursor-pointer rounded-full bg-[#d7edaa] px-6 py-3.5 text-sm font-bold text-[#173a27] hover:bg-[#c6e493] focus-visible:outline-[#386844] disabled:cursor-wait disabled:opacity-60" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Logging in…' : 'Log in'}</button>
+            <p className={`text-sm leading-relaxed ${messageType === 'error' ? 'text-red-700' : 'text-[#52655c]'}`} role={messageType === 'error' ? 'alert' : 'status'} aria-live="polite">{message}</p>
           </form>
           <p className="mt-6 text-center text-sm text-[#52655c]">New to Animal Care? <a className="font-bold text-[#386844] underline underline-offset-4 focus-visible:outline-[#386844]" href="#register">Create an account</a></p>
         </div>

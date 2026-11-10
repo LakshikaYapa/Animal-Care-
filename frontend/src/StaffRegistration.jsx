@@ -1,7 +1,7 @@
 import ThemeToggle from './ThemeToggle.jsx'
 import { useState } from 'react'
 
-export default function StaffRegistration() {
+export default function StaffRegistration({ onValuesChange, onSubmitRole, isSubmitting, isComplete, submitLabel }) {
   const [staff, setStaff] = useState({ fullName: '', staffId: '', email: '', password: '', confirmPassword: '' })
 
   const [confirmationTouched, setConfirmationTouched] = useState(false)
@@ -9,7 +9,18 @@ export default function StaffRegistration() {
 
   function updateStaff(event) {
     const { name, value } = event.target
-    setStaff((previous) => ({ ...previous, [name]: value }))
+    const next = { ...staff, [name]: value }
+    setStaff(next)
+    onValuesChange('staff', next)
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    if (staff.password !== staff.confirmPassword) {
+      setConfirmationTouched(true)
+      return
+    }
+    await onSubmitRole('staff', staff)
   }
 
   return (
@@ -34,7 +45,8 @@ export default function StaffRegistration() {
         <p className="text-[11px] font-bold tracking-[2.5px]">EXISTING STAFF MEMBERS</p>
         <h1 className="my-3 text-[clamp(26px,2.5vw,34px)] leading-[1.15] font-medium tracking-[-1px]" id="staff-title">Staff member registration</h1>
         <p className="text-sm leading-relaxed text-[#52655c]">Already part of our animal care team? Register using your existing staff ID.</p>
-          <fieldset className="mt-4 grid gap-3 border-t border-[#dce4d8] pt-3 sm:grid-cols-2">
+          <form className="mt-4" onSubmit={handleSubmit}>
+          <fieldset disabled={isSubmitting || isComplete} className="grid gap-3 border-t border-[#dce4d8] pt-3 sm:grid-cols-2">
             <legend className="px-2 text-xl font-medium">Staff details</legend>
             <p className="text-sm text-[#52655c] sm:col-span-2">All fields are required.</p>
             {[
@@ -51,6 +63,10 @@ export default function StaffRegistration() {
             ))}
             {passwordsMismatch && <p className="text-sm text-red-700 sm:col-span-2" id="staff-password-error" role="alert">Passwords do not match.</p>}
           </fieldset>
+          <button className="mt-4 w-full rounded-full bg-[#d7edaa] px-6 py-3 text-sm font-bold text-[#18372e] enabled:cursor-pointer enabled:hover:bg-[#c6e493] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto" type="submit" disabled={isSubmitting || isComplete}>
+            {isSubmitting ? 'Creating account…' : isComplete ? 'Account created' : submitLabel}
+          </button>
+          </form>
         </div>
       </section>
     </main>

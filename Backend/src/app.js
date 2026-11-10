@@ -2,6 +2,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import healthRoutes from './routes/healthRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/api/health', healthRoutes)
+app.use('/api/auth', authRoutes)
 
 app.use((_request, _response, next) => {
   const error = new Error('Route not found.')
