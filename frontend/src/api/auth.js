@@ -8,6 +8,10 @@ async function authRequest(path, options = {}) {
       ...(options.body ? { 'Content-Type': 'application/json' } : {}),
       ...options.headers,
     },
+  }).catch(() => {
+    const error = new Error('Cannot connect to Animal Care. Please check that the backend is running and try again.')
+    error.validationErrors = []
+    throw error
   })
 
   const result = await response.json().catch(() => ({}))
