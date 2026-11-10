@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import VolunteerRegistration from './VolunteerRegistration.jsx'
 import AdopterRegistration from './AdopterRegistration.jsx'
 import FunderRegistration from './FunderRegistration.jsx'
@@ -22,6 +22,11 @@ export default function MultiRoleRegistration({ roles }) {
   const [isComplete, setIsComplete] = useState(false)
   const [feedback, setFeedback] = useState({ type: '', message: '', errors: [] })
   const selection = roles.map((role) => role.value).join(',')
+  const feedbackRef = useRef(null)
+
+  useEffect(() => {
+    if (feedback.message) feedbackRef.current?.scrollIntoView({ block: 'center' })
+  }, [feedback])
 
   function updateRoleValues(role, values) {
     setRoleValues((previous) => ({ ...previous, [role]: values }))
@@ -78,7 +83,7 @@ export default function MultiRoleRegistration({ roles }) {
       setFeedback({
         type: 'error',
         message: error.message,
-        errors: error.validationErrors.map(({ field, message }) => `${field}: ${message}`),
+        errors: (Array.isArray(error.validationErrors) ? error.validationErrors : []).map(({ field, message }) => `${field}: ${message}`),
       })
     } finally {
       setIsSubmitting(false)
@@ -99,7 +104,7 @@ export default function MultiRoleRegistration({ roles }) {
         </div>
         <p className="mt-2 text-sm text-[#52655c]">Switch between roles to enter your details. Your entries stay here while you switch. Use the same name, email, and password for each role.</p>
         {feedback.message && (
-          <div className={`mt-3 rounded-xl border p-3 text-sm ${feedback.type === 'error' ? 'border-red-300 bg-red-50 text-red-800' : feedback.type === 'success' ? 'border-[#90ad7b] bg-[#f0f7e8] text-[#18372e]' : 'border-[#dce4d8] bg-[#f7f7ef] text-[#52655c]'}`} role={feedback.type === 'error' ? 'alert' : 'status'} aria-live="polite">
+          <div ref={feedbackRef} className={`mt-3 rounded-xl border p-3 text-sm ${feedback.type === 'error' ? 'border-red-300 bg-red-50 text-red-800' : feedback.type === 'success' ? 'border-[#90ad7b] bg-[#f0f7e8] text-[#18372e]' : 'border-[#dce4d8] bg-[#f7f7ef] text-[#52655c]'}`} role={feedback.type === 'error' ? 'alert' : 'status'} aria-live="polite">
             <p>{feedback.message}</p>
             {feedback.errors.length > 0 && <ul className="mt-2 list-disc pl-5">{feedback.errors.map((error, index) => <li key={`${error}-${index}`}>{error}</li>)}</ul>}
             {isComplete && <a className="mt-2 inline-block font-bold underline underline-offset-4" href="#login">Log in</a>}

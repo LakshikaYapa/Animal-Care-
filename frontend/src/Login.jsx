@@ -1,6 +1,7 @@
 import ThemeToggle from './ThemeToggle.jsx'
 import { useState } from 'react'
 import { useAuth } from './auth/AuthContext.js'
+import { dashboardForUser } from './auth/dashboard.js'
 
 export default function Login() {
   const { login } = useAuth()
@@ -22,10 +23,12 @@ export default function Login() {
     setIsSubmitting(true)
     setMessage('')
     try {
-      await login({ identifier: identifier.value.trim(), password: form.elements.password.value })
+      const user = await login({ identifier: identifier.value.trim(), password: form.elements.password.value })
+      const destination = dashboardForUser(user)
+      if (!destination) throw new Error('Your account does not have dashboard access. Please contact the Animal Care team.')
       setMessageType('status')
       setMessage('Login successful.')
-      window.location.hash = ''
+      window.location.hash = destination
     } catch (error) {
       setMessageType('error')
       setMessage(error.message)

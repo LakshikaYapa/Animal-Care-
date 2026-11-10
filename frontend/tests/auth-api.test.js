@@ -9,6 +9,20 @@ function jsonResponse(data, status = 200) {
   })
 }
 
+test('a disconnected backend returns a displayable error instead of crashing registration', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => { throw new TypeError('Failed to fetch') }
+  try {
+    await assert.rejects(registerAccount({}), (error) => {
+      assert.match(error.message, /backend is running/)
+      assert.deepEqual(error.validationErrors, [])
+      return true
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
 test('registration sends the API payload with credentialed JSON requests', async () => {
   const originalFetch = globalThis.fetch
   let captured

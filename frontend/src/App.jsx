@@ -7,6 +7,8 @@ import MemberDashboard from './MemberDashboard.jsx'
 import MultiRoleRegistration from './MultiRoleRegistration.jsx'
 import { selectedRolesFromHash } from './registrationRoles.js'
 import { useAuth } from './auth/AuthContext.js'
+import DashboardAccess from './auth/DashboardAccess.jsx'
+import { dashboardForUser } from './auth/dashboard.js'
 
 function App() {
   const [page, setPage] = useState(window.location.hash)
@@ -20,8 +22,8 @@ function App() {
     return () => window.removeEventListener('hashchange', onNavigate)
   }, [])
 
-  if (page === '#staff/dashboard') return <StaffDashboard />
-  if (page === '#dashboard') return <MemberDashboard />
+  if (page === '#staff/dashboard') return <DashboardAccess page={page}><StaffDashboard /></DashboardAccess>
+  if (page === '#dashboard') return <DashboardAccess page={page}><MemberDashboard /></DashboardAccess>
   if (page === '#login') return <Login />
   if (page.startsWith('#register/details?')) {
     const roles = selectedRolesFromHash(page)
@@ -82,6 +84,7 @@ function Home() {
           ) : user ? (
             <div className="flex items-center gap-2 sm:gap-4">
               <span className="hidden max-w-36 truncate text-sm font-medium sm:inline" title={user.fullName}>Hi, {user.fullName}</span>
+              {dashboardForUser(user) && <a className="text-sm font-medium hover:underline focus-visible:outline-[#386844]" href={dashboardForUser(user)}>My dashboard</a>}
               <button className="rounded-full bg-[#18372e] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#386844] focus-visible:outline-[#386844]" type="button" onClick={handleLogout}>Log out</button>
             </div>
           ) : (
