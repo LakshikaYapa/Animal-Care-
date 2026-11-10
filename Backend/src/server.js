@@ -11,6 +11,6 @@ try {
   process.exit(1)
 }
 
-app.listen(port, () => {
-  console.log(`PawCare API listening on http://localhost:${port}`)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`PawCare API listening on port ${port} (0.0.0.0)`)
 })
