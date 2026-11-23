@@ -1,0 +1,11 @@
+pipeline {
+    agent { label 'rootless-docker' }
+
+    stages {
+        stage('Verify checkout') {
+            steps {
+                sh 'git log -1 --oneline'
+            }
+        }
+    }
+}
